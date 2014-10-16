@@ -1,0 +1,40 @@
+#budget_table, #card_table{
+	background-color: white;
+	border: 3px solid white;
+	border-radius: 5px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	text-align: center;
+}
+
+#budget_table_header tr th, #card_table_header tr th{
+	color: #FF3300;
+	text-align: center;
+}
+
+#budget_table_body tr td, #card_table_body tr td{
+	color: #FF9933;
+	border: 3px solid #0099CC;
+	border-radius: 5px;
+}
+
+.delete_button{
+	color: white;
+	background-color: #0099CC;
+	border-color: #0099CC;
+}
+
+.delete_button:hover{
+	color: white;
+	background-color: #211D8C;
+	border-color: #211D8C;
+}
+
+.delete_button:focus{
+	color: white;
+	background-color: #0099CC;
+	border-color: #0099CC;
+}
+
+.delete_button_td{
+	border: 0 !important;
+}

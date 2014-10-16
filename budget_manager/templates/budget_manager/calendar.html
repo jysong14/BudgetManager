@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% load static %}
+        <script type="text/javascript" src="{% static '/static/lib/jquery-1.10.2.js' %}"></script>
+        <script type="text/javascript" src="{% static '/static/lib/jquery-ui-1.10.4.custom.min.js' %}"></script>
+        <script text="text/javascript" src="{% static '/static/lib/jquery.cookie.js' %}"></script>
+        <script text="text/javascript" src="{% static '/static/lib/bootstrap.js' %}"></script>
+        <script type="text/javascript" src="{% static '/static/js/calendar.js' %}"></script>
+        <script type="text/javascript" src="{% static '/static/js/calendar_input.js' %}"></script>
+        <script text="text/javascript" src="{% static '/static/js/error_handler.js' %}"></script>
+        <link rel="stylesheet" text="text/css" href="{% static '/static/lib/bootstrap.css' %}"/>
+      	<link rel="stylesheet" type="text/css" href="{% static '/static/css/calendar.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/static/css/header.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/static/css/footer.css' %}"/>
+    </head>
+	<body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-fixed-top" id="header" role="navigation">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="http://localhost:8000/budget_manager/main/">Main</a></li>
+                    <li class="active"><a href="http://localhost:8000/budget_manager/calendar/">Calendar</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://localhost:8000/budget_manager/profile/">{{ user.username }}</a></li>
+                    <li><a href="http://localhost:8000/budget_manager/logout">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="row">
+                <div class="col-lg-3" id="input"></div>
+                <div class="col-lg-6" id="datepicker_container">
+        	       <div id="datepicker"></div>
+                   <p id="msg_container"></p>
+                </div>
+            </div>
+            <div id="insert_entry">
+                <div id="entry_date"></div>
+                <form onsubmit="return false">
+                    {% csrf_token %}
+                    <select class="form-control" name="card" id="card">
+                        <option id="default_card" value="" selected>Select Card</option>
+                        {% for card in cards %}
+                            <option value={{card.number}}>{{card.number}}</option>
+                        {% endfor %}
+                        <option value="0">Cash</option>
+                    </select><br/>
+                    <div id="card_error" hidden>Choose a Card!</div>
+                    <select class="form-control" name="spending_categories" id="spending_categories">
+                        <option id="first_cagetory" value="" selected>Select Category</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Food">Food</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Other">Other</option>
+                    </select><br/>
+                    <div id="category_error" hidden>Choose a Category!</div>
+                    <div id="description_box">
+                        <label for="description">Description</label><br/>
+                        <input class="form-control" type="text" name="description" id="description" maxlength="20" required>
+                        <div id="description_error"></div>
+                    </div>
+                    <div id="amount_box">
+                        <label for="amount">Amount</label><br/>
+                        <input class="form-control" type="text" name="amount" id="amount" required>
+                        <div id="amount_error"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <footer class="col-lg-12"  id="lcp">
+                    <p>© Copyright By Jae Yun Song</p>
+                </footer>
+            </div>
+        </div>
+	</body>
+</html>

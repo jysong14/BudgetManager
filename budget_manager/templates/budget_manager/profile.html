@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% load static %}
+        <script type="text/javascript" src="{% static '/static/lib/jquery-1.10.2.js' %}"></script>
+        <script type="text/javascript" src="{% static '/static/lib/jquery-ui-1.10.4.custom.min.js' %}"></script>
+        <script text="text/javascript" src="{% static '/static/lib/jquery.cookie.js' %}"></script>
+        <script text="text/javascript" src="{% static '/static/lib/bootstrap.js' %}"></script>
+        <script type="text/javascript" src="{% static '/static/js/profile.js' %}"></script>
+        <link rel="stylesheet" text="text/css" href="{% static '/static/lib/bootstrap.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/static/css/profile.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/static/css/table.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/static/css/header.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/static/css/footer.css' %}"/>
+    </head>
+	<body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-fixed-top" id="header" role="navigation">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="http://localhost:8000/budget_manager/main/">Main</a></li>
+                    <li><a href="http://localhost:8000/budget_manager/calendar/">Calendar</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="http://localhost:8000/budget_manager/profile/">{{ user.username }}</a></li>
+                    <li><a href="http://localhost:8000/budget_manager/logout">Logout</a></li>
+                </ul>
+            </nav>
+            <div id="content">
+                <div class="row">
+                    <div class="col-lg-1" id="card_menu">
+                        <div class="row">
+                            <button class="btn cm-btn ac">Add Card</button>
+                        </div>
+                        <div class="row">
+                            <button class="btn cm-btn ab">Add Balance</button>
+                        </div>
+                        <div class="row">
+                            <button class="btn cm-btn wd">Withdraw</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <table id="card_table">
+                            <thead id="card_table_header">
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Category</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="card_table_body">
+                                {% for card in cards %}
+                                    {% if card.category == 'Debit'%}
+                                        <tr><td>{{ card.number }}</td><td>{{ card.category }}</td><td>{{ card.balance|floatformat:-2 }}</td><td class="delete_button_td"><button type="button" class="delete_button btn" value={{ card.number }}>Delete</button></td></tr>
+                                    {% else %}
+                                        <tr><td>{{ card.number }}</td><td>{{ card.category }}</td><td>None</td><td class="delete_button_td"><button type="button" class="delete_button btn" value={{ card.number }}>Delete</button></td></tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <p id="msg_container"></p>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="row" id="add_card" hidden>
+                            <h4 class="input_label" id="input_header">Add Card</h4>
+                            <form onsubmit="return false">
+                                {% csrf_token %}
+                                <div id="button_box">
+                                    <input type="radio" id="credit" name="card_type" value="Credit" checked/>
+                                    <label for="credit">Credit</label>
+                                    <input type="radio" id="debit" name="card_type" value="Debit"/>
+                                    <label for="debit">Debit</label><br/>
+                                </div>
+                                <div id="card_balance_form" hidden>
+                                    <label class="input_label">Insert Card Balance</label><br/>
+                                    <input class="form-control" type="number" name="card_balance" id="card_balance"/>
+                                </div>
+                                <label class="input_label">Insert Last 4 Digits</label><br/>
+                                <input class="form-control" type="number" name="card_number" id="card_number"/><br/>
+                                <input class="form-control" id="add_card_submit" type="submit" value="Submit"/><br/>
+                            </form>
+                        </div>
+                        <div class="row" id="add_balance" hidden>
+                            <h4 class="input_label" id="input_header">Add Balance</h4>
+                            <form onsubmit="return false">
+                                {% csrf_token %}
+                                <select class="form-control" name="card" id="add_balance_card">
+                                    <option id="default_card" value="" selected>Select Card</option>
+                                    {% for card in cards %}
+                                        {% if card.category == "Debit" %}
+                                            <option value={{card.number}}>{{card.number}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select><br/>
+                                <div id="card_balance">
+                                    <label class="input_label">Insert Balance</label><br/>
+                                    <input class="form-control" type="number" name="balance" id="add_balance_amount"/>
+                                </div><br/>
+                                <input class="form-control" id="add_balance_submit" type="submit" value="Submit"/><br/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <footer class="col-lg-12" id="lcp">
+                    <p>© Copyright By Jae Yun Song</p>
+                </footer>
+            </div>
+        </div>
+	</body>
+</html>

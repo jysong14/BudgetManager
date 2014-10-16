@@ -1,0 +1,36 @@
+body{
+	background-color: #0099CC;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#logo{
+	text-align: center;
+}
+
+#logo img{
+	display: inline-block;
+}
+
+#intro p{
+	margin-top: 15px;
+}
+
+#login-form{
+	background-color: #45CBEC !important;
+	padding-left: 15px !important;
+}
+
+#login-form form{
+	margin-right: 0rem;
+}
+
+#intro{
+	font-size: 3rem;
+	color: white;
+}
+
+#signup_header{
+	/*color: #FF9933;*/
+	color: white;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		{% load static %}
+		<script type="text/javascript" src="{% static '/static/lib/jquery-1.10.2.js' %}"></script>
+		<script type="text/javascript" src="{% static '/static/lib/jquery-ui-1.10.4.custom.min.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/lib/bootstrap.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/lib/jquery.cookie.js' %}"></script>
+		<script type="text/javascript" src="{% static '/static/lib/highcharts.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/js/piechart.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/js/linegraph.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/js/entry_table.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/js/main.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/js/error_handler.js' %}"></script>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/lib/bootstrap.css' %}"/>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/css/main.css' %}"/>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/css/table.css' %}"/>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/css/header.css' %}"/>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/css/footer.css' %}"/>
+	</head>
+	<body>
+		<div class="container">
+	        <nav class="navbar navbar-fixed-top" id="header" role="navigation">                
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="active"><a href="http://localhost:8000/budget_manager/main/">Main</a></li>
+                    <li><a href="http://localhost:8000/budget_manager/calendar/">Calendar</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://localhost:8000/budget_manager/profile/">{{ user.username }}</a></li>
+                    <li><a href="http://localhost:8000/budget_manager/logout">Logout</a></li>
+                </ul>
+            </nav>
+
+			<div class="row" id="content">
+		        <div id="menu" class="col-lg-2">
+		        	<div id="menu_content">
+						<form id="menu_form">
+							<label class="titles" for="year">Year</label><br/>
+							<table id="year">
+								<tr>
+									<td>
+										<input class="year_check_button" id="2014" type="radio" name="year_check_button" value="2014" checked/>
+										<label for="2014">2014</label><br/>
+									</td>
+								</tr>
+							</table>
+							<label class="titles" for="month">Month</label><br/>
+							<table id="month">	
+								<tr>
+									<td><input class="month_check_button" id="Jan" type="checkbox" name="month_check_button" value='1'/>
+										<label for="Jan">Jan</label>
+									</td>
+									<td><input class="month_check_button" id="Feb" type="checkbox" name="month_check_button" value='2'/>
+										<label for="Feb">Feb</label>
+									</td>
+									<td><input class="month_check_button" id="Mar" type="checkbox" name="month_check_button" value='3'/>
+										<label for="Mar">Mar</label>
+									</td>
+									<td><input class="month_check_button" id="Apr" type="checkbox" name="month_check_button" value='4'/>
+										<label for="Apr">Apr</label>
+									<td>
+								</tr>
+								<tr>
+									<td><input class="month_check_button" id="May" type="checkbox" name="month_check_button" value='5'/>
+										<label for="May">May</label>
+									</td>
+									<td><input class="month_check_button" id="Jun" type="checkbox" name="month_check_button" value='6'/>
+										<label for="Jun">Jun</label>
+									</td>
+									<td><input class="month_check_button" id="Jul" type="checkbox" name="month_check_button" value='7'/>
+										<label for="Jul">Jul</label>
+									</td>
+									<td><input class="month_check_button" id="Aug" type="checkbox" name="month_check_button" value='8'/>
+										<label for="Aug">Aug</label>
+									</td>
+								</tr>
+								<tr>
+									<td><input class="month_check_button" id="Sep" type="checkbox" name="month_check_button" value='9'/>
+										<label for="Sep">Sep</label>
+									</td>
+									<td><input class="month_check_button" id="Oct" type="checkbox" name="month_check_button" value='10'/>
+										<label for="Oct">Oct</label>
+									</td>
+									<td><input class="month_check_button" id="Nov" type="checkbox" name="month_check_button" value='11'/>
+										<label for="Nov">Nov</label>
+									</td>
+									<td><input class="month_check_button" id="Dec" type="checkbox" name="month_check_button" value='12'/>
+										<label for="Dec">Dec</label>
+									</td>
+								</tr>
+							</table>
+							<label class="titles" for="day">Day</label><br/>
+							<table id="day">
+								<tbody id="day_body"></tbody>
+							</table>
+							<label class="titles">Card</label><br/>
+							<table id="card_container">
+								<tbody>
+									<tr>
+										{% for card in cards %}
+											<td>
+												<input class="card_check_button" id="{{card.number}}" name="card_check_button" type="radio" value="{{card.number}}"/>
+												<label for="{{card.number}}">{{card.number}}</label>
+											</td>
+											{% if forloop.counter|divisibleby:4 %}
+												</tr><tr>
+											{% endif %}
+										{% endfor %}
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						<button type="button" class="btn btn-info" id="menu_submit">Submit</button>
+					</div>
+			    </div>
+
+			    <div class="col-lg-4" id="table">
+					<table id="budget_table">
+						<thead id="budget_table_header">
+							<tr>
+								<th>Date</th>
+								<th>Category</th>
+								<th>Description</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody id="budget_table_body"></tbody>
+					</table>
+				</div>
+
+				<div class="col-lg-6" id="graph">
+					<div class="row" id="piechart"></div><br/>
+					<div class="row" id="linegraph"></div>
+				</div>
+			</div>
+			<div class="row" >
+				<footer class="col-lg-12" id="main">
+					<p>© Copyright By Jae Yun Song</p>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>

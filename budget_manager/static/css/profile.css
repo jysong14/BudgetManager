@@ -1,0 +1,116 @@
+#card_menu{
+	margin-left: 15px;
+}
+
+#add_card form, #add_balance form{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.cm-btn{
+	width: 100%;
+	margin-bottom: 15px;
+	color: white;
+	border: 0;
+}
+
+.cm-btn.wd{
+	background-color: #FF3300;
+}
+
+.cm-btn.wd:hover, .cm-btn.wd:focus{
+	color: white;
+	background-color: #FF3300;
+}
+
+.cm-btn.ab{
+	background-color: #FF9933;
+}
+
+.cm-btn.ab:hover, .cm-btn.ab:focus{
+	color: white;
+	background-color: #FF9933;
+}
+
+.cm-btn.ac{
+	background-color: #45CBEC;
+}
+
+.cm-btn.ac:hover, .cm-btn.ac:focus{
+	color: white;
+	background-color: #45CBEC;
+}
+
+#add_balance_card{
+	color: #0099CC;
+	font-weight: bold;
+}
+
+#add_balance{
+	background-color: white;
+	border-radius: 5px;
+}
+
+#add_card{
+	background-color: white;
+	border-radius: 5px;
+}
+
+#msg_container{
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 0;
+}
+
+#card_table{
+	margin: 0 auto;
+}
+
+#add_card_submit, #add_balance_submit{
+	background-color: #0099CC;
+	border: 0;
+	color: white;
+}
+
+#add_card_submit:hover, #add_balance_submit:hover{
+	background-color: #211D8C;
+	color: white;
+}
+
+.input_label{
+	color: #0099CC;
+	font-weight: bold;
+}
+
+#input_header{
+	text-align: center;
+}
+
+#button_box{
+	display: inline-block;
+	margin-left: 53.328px;
+}
+
+input[type=radio]{
+	display: none;
+}
+
+input[type=radio] + label{
+	cursor: pointer;
+	text-align: center;
+	width: 6rem;
+	height: 3rem;
+	color: white;
+	background-color: #0099CC;
+	display: inline-block;
+	padding: 0.5rem;
+	margin-right: 0.3rem;
+	border-radius: 5px;
+}
+
+input[type=radio]:checked + label{
+	background-color: #211D8C;
+};

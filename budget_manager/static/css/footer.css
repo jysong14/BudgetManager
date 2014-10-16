@@ -1,0 +1,16 @@
+footer{
+	width: 100%;
+	color: white;
+	background-color: #45CBEC !important;
+	padding-top: 1rem;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+footer#main{
+	margin-top: 15px;
+}
+
+footer#lcp{
+	position: absolute;
+	bottom: 0;
+}

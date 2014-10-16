@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Budget Manager</title>
+		{% load static %}
+		<script type="text/javascript" src="{% static '/static/lib/jquery-1.10.2.js' %}"></script>
+	    <script type="text/javascript" src="{% static '/static/lib/jquery-ui-1.10.4.custom.min.js' %}"></script>
+		<script text="text/javascript" src="{% static '/static/lib/bootstrap.js' %}"></script>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/lib/bootstrap.css' %}"/>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/css/index.css' %}"/>
+		<link rel="stylesheet" text="text/css" href="{% static '/static/css/footer.css' %}"/>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" id="login-form">
+				<form class="navbar-form navbar-right" role="form" method='post' action='{% url "budget_manager:index_request" "login" %}'>
+					{% csrf_token %}
+					<input type='text' class="form-control" name="username" placeholder='Username' autocomplete='off'/>
+					<input type='password' class="form-control" name="password" placeholder='Password'/>
+					<input type='submit' class="form-control" value='Login'/>
+				</form>
+			</div>
+			<div id="content" class="row">
+				<div class="col-lg-9" id="intro">
+					<div id="logo">
+						<img src="{%static '/static/img/logo.gif' %}"/>
+					</div>
+					<p>Budget Manager is an application that will help you keep track of the money you have spent.
+					You can insert budget entries by dates and review your spendings through graphical analysis such as graphs and tables.
+					Sign up and start recording your expenses for efficient budget management!</p>
+				</div>
+				<div class="col-lg-3">
+					<h2 id="signup_header">Sign Up</h2>
+					<form method='post' action='{% url "budget_manager:index_request" "signup" %}'>
+						{% csrf_token %}
+						<input type='text' class="form-control" name='username' placeholder='Username' autocomplete='off'/><br/>
+						<input type='password' class="form-control" name='password' placeholder='Password' autocomplete='off'/><br/>
+						<input type='text' class="form-control" name='email' placeholder='Email' autocomplete='off'/><br/>
+						<input type='text' class="form-control" name='verify_email' placeholder='Verify Email' autocomplete='off'/><br/>
+						<input type='submit' class="form-control" value='Signup'/>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+	            <footer class="col-lg-12" id="lcp">
+	                <p>© Copyright By Jae Yun Song</p>
+	            </footer>
+	        </div>
+		</div>
+	</body>
+</html>
